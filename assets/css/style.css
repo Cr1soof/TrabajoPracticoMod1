@@ -1,0 +1,14 @@
+h1 {
+  font-family: Impact, sans-serif;
+  color: red;
+}
+    
+p {
+  font-family: arial;
+  color: rgb(12, 140, 245);
+  /* padding: 7px;
+  border: 1px solid blue;
+  margin: 100px */
+}
+body {background-color: coral;}
+        

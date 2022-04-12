@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets\css\bootstrap.min.css">
+    <link rel="stylesheet" href="assets\css\style.css">
+    
+    <link rel="stylesheet" href="assets\js\bootstrap.bundle.min.js">
+    <link rel="stylesheet" href="assets\js\jquery-3.6.0.min.js">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="https://netdna.bootstrapcdn.com/bootstrap/2.3.2/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/js/bootstrap-datepicker.min.js"></script>
+    <title>Yo lo lavo</title>  
+
+</head>
+<body background-color: coral>
+    <div align="center">
+        <img src="assets\img\descarga.jpg" width="400" height="341" >
+    </div>
+    <div>
+        <p><b> Bienvenidos a lavado de autos "Yo lo lavo", el mejor lavado de todo el pais, los mas rapido, mas confiables
+           economicos, somo el servicios mas completo!</b></p>
+    </div>
+    <form action="#" method="post" id="formu">
+        <b><legend class="text-center header">Registrar cliente</legend></b>
+        <div class="form-group"> <!-- Street 2 -->
+            <label for="rut_full" class="control-label">Rut</label>
+            <input type="text" class="form-control" id="rut_full" name="rut_full" placeholder="xxxxxxxx-x" maxlength="10" minlength="9">
+        </div>
+        <script>
+         $('input[name=rut_full]').bind('keypress', function(event) {
+                var regex = new RegExp("^[kK 1-9 -]+$");
+                var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
+                if (!regex.test(key)) {
+                event.preventDefault();
+                return false;
+                }
+            })
+         var Fn = {
+	// Valida el rut con su cadena completa "XXXXXXXX-X"
+                    validaRut : function (rutCompleto) {
+                        rutCompleto = rutCompleto.replace("‐","-");
+                        if (!/^[0-9]+[-|‐]{1}[0-9kK]{1}$/.test( rutCompleto ))
+                            return false;
+                        var tmp 	= rutCompleto.split('-');
+                        var digv	= tmp[1]; 
+                        var rut 	= tmp[0];
+                        if ( digv == 'K' ) digv = 'k' ;
+                        
+                        return (Fn.dv(rut) == digv );
+                    },
+                    dv : function(T){
+                        var M=0,S=1;
+                        for(;T;T=Math.floor(T/10))
+                            S=(S+T%10*(9-M++%6))%11;
+                        return S?S-1:'k';
+                    }
+                }
+        $("#rut_full").focusout(function(){
+            if (Fn.validaRut( $("#rut_full").val() )){
+            } else {
+                alert('El rut no es valido');
+                document.getElementById("rut_full").value = "";
+            }
+        });
+        </script>
+
+        <div class="form-group"> <!-- Full Name -->
+            <label for="nombre" class="control-label">Nombre </label>
+            <input type="text" pattern="^[A-Za-z]+$" class="form-control" id="nombre" name="nombre" maxlength="50">
+        </div>
+
+        <div class="form-group"> <!-- Full Name -->
+            <label for="apellido" class="control-label">Apellido </label>
+            <input type="text" pattern="^[A-Za-z]+$" class="form-control" id="apellido" name="apellido" maxlength="50" >
+        </div>     
+        
+        <script>
+            $('input[name=apellido]').bind('keypress', function(event) {
+                var regex = new RegExp("^[a-zA-Z ]+$");
+                var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
+                if (!regex.test(key)) {
+                event.preventDefault();
+                return false;
+                }
+            })
+
+            $('input[name=nombre]').bind('keypress', function(event) {
+                var regex = new RegExp("^[a-zA-Z ]+$");
+                var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
+                if (!regex.test(key)) {
+                event.preventDefault();
+                return false;
+                }
+            })
+        </script>
+
+        <div class="form-group"> <!-- Street 1 -->
+            <label for="direccion" class="control-label">Direccion</label>
+            <input type="text" class="form-control" id="direccion" name="direccion" maxlength="100" >
+        </div>                                                          
+                                
+        <div class="form-group"> <!-- State Button -->
+            <label for="comuna" class="control-label">Comuna</label>
+            <select class="form-control" id="comuna">
+                <option value="SA">Santiago</option>
+                <option value="CO">Conchalí</option>
+                <option value="HU">Huechuraba</option>
+                <option value="IN">Independencia</option>
+                <option value="QI">Quilicura</option>
+                <option value="RE">Recoleta</option>
+                <option value="RA">Renca</option>
+                <option value="LC">Las Condes</option>
+                <option value="LB">Lo Barnechea</option>
+                <option value="PR">Providencia</option>
+                <option value="VI">Vitacura</option>
+                <option value="LR">La Reina</option>
+                <option value="MA">Macul</option>
+                <option value="NN">Ñuñoa</option>
+                <option value="PN">Peñalolén</option>
+                <option value="LF">La Florida</option>                
+            </select>                    
+        </div>
+        <br>
+        <br>
+        <b><legend class="text-center header">Registrar vehiculo</legend></b>
+        
+        <div class="form-group"> <!-- Zip Code-->
+            <label for="tpVehiculo" class="control-label"> Tipo de Vehículo</label>
+            <input type="text" class="form-control" id="tpVehiculo" name="tpVehiculo" placeholder="furgón, automóvil, camión, camioneta y moto">
+        </div>  
+
+        <div class="form-group"> <!-- Zip Code-->
+            <label for="modelo" class="control-label"> Marca</label>
+            <input type="text" class="form-control" id="modelo" name="modelo" >
+        </div> 
+
+        <div class="form-group"> <!-- Zip Code-->
+            <label for="modelo" class="control-label"> Modelo</label>
+            <input type="text" class="form-control" id="modelo" name="modelo" >
+        </div> 
+        
+        <div class="form-group"> <!-- Zip Code-->
+            <label for="datepicker" class="control-label"> Año</label>
+            <input type="number" class="form-control" min="1000" max="9999" name="datepicker" id="datepicker" />
+        </div>
+
+        <b><label for="revTec" class="control-label"> Revisión Técnica</label></b>
+        <div class="input-group" id="revTec">            
+            <span class="radio">                 
+              <label>
+                <input type="radio" class="radiobox" name="rev">
+                <span> Al dia</span> 
+              </label>              
+              <label>
+                <input type="radio" class="radiobox" name="rev">
+                <span> Atrasada</span> 
+              </label>
+            </span>
+        </div>
+
+        <script>
+            $("#datepicker").datepicker({
+                format: "yyyy",
+                viewMode: "years", 
+                minViewMode: "years",
+                autoclose:true //to close picker once year is selected
+            });
+        </script>
+        <br>
+        <br>
+        <legend class="text-center header">Servicios </legend>
+        <br>
+        <b><label for="revTec" class="control-label"> Nuestros Servicios</label></b>
+        <br>
+        <input type="checkbox" id="lavIntExt" value="7000">
+        <label for="lavIntExt"> Lavado exterior e interior - $7000</label><br>
+
+        <input type="checkbox" id="lavMotor" value="15000"> 
+        <label for="lavMotor"> Lavado de motor - $15000</label>
+        <br>
+        <br>
+        <div class="form-group"> <!-- Submit Button -->
+            <button type="submit" class="btn btn-primary">Enviar</button>
+        </div>                    
+
+    </form>
+</body>
+</html>
